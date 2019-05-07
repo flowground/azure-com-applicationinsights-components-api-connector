@@ -1,0 +1,60 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Describes the body of a purge request for an App Insights component",
+            "properties": {
+                "filters": {
+                    "description": "The set of columns and filters (queries) to run over them to purge the resulting data.",
+                    "items": {
+                        "description": "User-defined filters to return data which will be purged from the table.",
+                        "properties": {
+                            "column": {
+                                "description": "The column of the table over which the given query should run",
+                                "type": "string"
+                            },
+                            "key": {
+                                "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension.",
+                                "type": "string"
+                            },
+                            "operator": {
+                                "description": "A query operator to evaluate over the provided column and value(s).",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "table": {
+                    "description": "Table from which to purge data.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "table",
+                "filters"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

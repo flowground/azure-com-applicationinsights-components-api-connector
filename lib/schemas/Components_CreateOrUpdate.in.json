@@ -1,0 +1,179 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "An azure resource object",
+                    "properties": {
+                        "id": {
+                            "description": "Azure resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "location": {
+                            "description": "Resource location",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "create",
+                                "read"
+                            ]
+                        },
+                        "name": {
+                            "description": "Azure resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags"
+                        },
+                        "type": {
+                            "description": "Azure resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "An Application Insights component definition.",
+            "properties": {
+                "kind": {
+                    "description": "The kind of application that this component refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone.",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Properties that define an Application Insights component resource.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "AppId": {
+                            "description": "Application Insights Unique ID for your Application.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "ApplicationId": {
+                            "description": "The unique ID of your application. This field mirrors the 'Name' field and cannot be changed.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "Application_Type": {
+                            "default": "web",
+                            "description": "Type of application being monitored.",
+                            "enum": [
+                                "web",
+                                "other"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "ApplicationType"
+                            },
+                            "x-ms-mutability": [
+                                "create",
+                                "read"
+                            ]
+                        },
+                        "CreationDate": {
+                            "description": "Creation Date for the Application Insights component, in ISO 8601 format.",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "Flow_Type": {
+                            "default": "Bluefield",
+                            "description": "Used by the Application Insights system to determine what kind of flow this component was created by. This is to be set to 'Bluefield' when creating/updating a component via the REST API.",
+                            "enum": [
+                                "Bluefield"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "FlowType"
+                            }
+                        },
+                        "HockeyAppId": {
+                            "description": "The unique application ID created when a new application is added to HockeyApp, used for communications with HockeyApp.",
+                            "externalDocs": {
+                                "url": "https://aka.ms/ewjuel"
+                            },
+                            "type": "string"
+                        },
+                        "HockeyAppToken": {
+                            "description": "Token used to authenticate communications with between Application Insights and HockeyApp.",
+                            "externalDocs": {
+                                "url": "https://aka.ms/sls76s"
+                            },
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "InstrumentationKey": {
+                            "description": "Application Insights Instrumentation key. A read-only value that applications can use to identify the destination for all telemetry sent to Azure Application Insights. This value will be supplied upon construction of each new Application Insights component.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "Request_Source": {
+                            "default": "rest",
+                            "description": "Describes what tool created this Application Insights component. Customers using this API should set this to the default 'rest'.",
+                            "enum": [
+                                "rest"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "RequestSource"
+                            }
+                        },
+                        "SamplingPercentage": {
+                            "description": "Percentage of the data produced by the application being monitored that is being sampled for Application Insights telemetry.",
+                            "externalDocs": {
+                                "url": "https://aka.ms/sl0yqd"
+                            },
+                            "format": "double",
+                            "type": "number"
+                        },
+                        "TenantId": {
+                            "description": "Azure Tenant Id.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "provisioningState": {
+                            "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "Application_Type"
+                    ]
+                }
+            },
+            "required": [
+                "kind"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
